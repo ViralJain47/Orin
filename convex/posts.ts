@@ -1,5 +1,6 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import {v} from "convex/values" ;
+import { getAuthenticatedUser } from "./users";
 
 export const generateUploadUrl = mutation(async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -22,15 +23,7 @@ export const createPost = mutation({
     },
 
     handler: async(ctx,args) =>{
-        const identity = await ctx.auth.getUserIdentity();
-        if(!identity) throw new Error("Unauthorized");
-
-        const currentUser = await ctx.db
-        .query("users")
-        .withIndex("by_clerk_id",(q) => q.eq("clerkId",identity.subject))
-        .first();
-
-        if(!currentUser) throw new Error("User not found");
+       const currentUser = await getAuthenticatedUser(ctx);
 
         const imageUrl = await ctx.storage.getUrl(args.storageId);
         if(!imageUrl) throw new Error("Image not found");
@@ -49,5 +42,49 @@ export const createPost = mutation({
         })
 
         return postId;
+    }
+})
+
+export const getFeedPosts = query({
+    handler: async(ctx) =>{
+        const currentUser = await getAuthenticatedUser(ctx);
+
+        //now we want to get all posts
+        const posts = await ctx.db.query("posts").order("desc").collect();
+        if(posts.length === 0) return [];
+
+        const postsWithInfo = await Promise.all(
+            posts.map( async(post) => {
+                const postAuthor = await ctx.db.get(post.userId);
+
+                const likes = await ctx.db
+                .query("likes")
+                .withIndex("by_user_and_post",(q) =>
+                    q.eq("userId",currentUser._id).eq("postId",post._id)
+                )
+                .first();
+
+                const bookmark = await ctx.db
+                .query("bookmarks")
+                .withIndex("by_user_and_post",(q) =>
+                    q.eq("userId",currentUser._id).eq("postId",post._id)
+                )
+                .first();
+
+                return{
+                    ...post,
+                    author:{
+                        _id:postAuthor?._id,
+                        username:postAuthor?.username,
+                        image:postAuthor?.image
+                    },
+                    isLiked: !!likes,
+                    isBookmarked: !!bookmark
+                }
+
+            } )
+        );
+
+        return postsWithInfo;
     }
 })
