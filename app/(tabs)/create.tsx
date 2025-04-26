@@ -70,6 +70,9 @@ try {
       try {
         const result = await createPost({storageId, caption});
         console.log("Post created successfully:", result);
+
+        setSelectedImage(null);
+        setCaption("");
         router.push("/(tabs)");
       } catch (postError) {
         console.error("Error creating post:", postError);
