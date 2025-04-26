@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View,  Image, ScrollView } from "react-native";
+import { Text, TouchableOpacity, View,  Image, ScrollView, FlatList } from "react-native";
 import {styles} from "../../styles/feed.styles"
 import { Link, useRouter } from "expo-router";
 import { useAuth } from "@clerk/clerk-expo";
@@ -27,14 +27,15 @@ export default function Index() {
       
       {/* header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Orin</Text>
+        <Text style={styles.headerTitle}>Orin </Text>
         <TouchableOpacity onPress={() => signOut()}>
           <Ionicons name="log-out-outline" size={24} color={COLORS.white}/>
         </TouchableOpacity>
       </View>
 
       {/* stories */}
-      <ScrollView 
+      {/* by using scrollview it renders all sort of things which may cause our application */}
+      {/* <ScrollView 
       showsVerticalScrollIndicator={false} 
       contentContainerStyle={{paddingBottom:60}}
       >
@@ -51,7 +52,16 @@ export default function Index() {
             <Post key={post._id} post={post}/>
           ))
         }
-      </ScrollView>
+      </ScrollView> */}
+
+      <FlatList 
+      data={posts}
+      renderItem={({item}) => <Post post={item}/>}
+      keyExtractor={(item) =>item._id}
+      showsVerticalScrollIndicator = {false}
+      contentContainerStyle={{paddingBottom:60}}
+      ListHeaderComponent={<StoriesSection />}
+      />
 
     </View>
 
@@ -81,6 +91,18 @@ export default function Index() {
     //     <Link href={"/profile"}>Profile screen</Link>
     // </View>
   );
+}
+
+const StoriesSection = () => {
+  return(
+    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.storiesContainer}>
+          {
+            STORIES.map((story) =>(
+              <Story key={story.id} story={story}/>
+            ))
+          }
+        </ScrollView>
+  )
 }
 
 const NoPostsFound = () => {
