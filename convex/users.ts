@@ -43,7 +43,52 @@ export const getUserByClerkId = query({
 
         return user;
     }
-})
+});
+
+export const updateProfile = mutation({
+    args:{
+        fullname : v.string(),
+        bio : v.string(),
+    },
+    handler : async (ctx,args) => {
+        const currentUser = await getAuthenticatedUser(ctx);
+
+        await ctx.db.patch(currentUser._id,{
+            fullname : args.fullname,
+            bio : args.bio,
+        });
+    },
+});
+
+export const getUserProfile = query({
+    args:{
+        userId : v.id("users"),
+    },
+    handler: async(ctx,args) => {
+        const user = await ctx.db.get(args.userId);
+        if(!user) throw new Error("User not found");
+
+        return user;
+    },
+});
+
+export const isFollowing = query({
+    args:{
+        followingId : v.id("users"),
+    },
+    handler: async(ctx,args) => {
+        const currentUser = await getAuthenticatedUser(ctx);
+
+        const follow = await ctx.db
+        .query("follows")
+        .withIndex("by_both",(q) => q.eq("followerId",currentUser._id).eq("followingId",args.followingId))
+        .first();
+
+        return !!follow;
+    },
+});
+
+
 
 export async function getAuthenticatedUser(ctx: QueryCtx | MutationCtx){
     const identity = await ctx.auth.getUserIdentity();

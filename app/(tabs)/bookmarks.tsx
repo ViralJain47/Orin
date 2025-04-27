@@ -33,7 +33,7 @@ export default function Bookmarks() {
          <View key={post._id} style={{width:"50%" , padding:1}}>
           <Image
             source={post.imageUrl}
-            style={{width:"100%", aspectRatio:1 }}
+            style={{width:"100%", aspectRatio:1 ,borderRadius:8}}
             contentFit='cover'
             transition={200}
             cachePolicy="memory-disk"
