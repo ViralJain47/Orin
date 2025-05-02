@@ -9,6 +9,7 @@ import { useQuery } from "convex/react";
 import { FlatList, RefreshControl, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../../styles/feed.styles";
 import { useState } from "react";
+import { Link } from "expo-router";
 
 export default function Index() {
 
@@ -35,9 +36,14 @@ export default function Index() {
       {/* header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Orin </Text>
-        <TouchableOpacity onPress={() => signOut()}>
+        {/* <TouchableOpacity onPress={() => signOut()}>
           <Ionicons name="log-out-outline" size={24} color={COLORS.white}/>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <Link
+        href="https://github.com/ViralJain47"
+        >
+          <Ionicons name="logo-github" size={30} color={COLORS.primary}/>
+        </Link>
       </View>
 
       {/* stories */}
@@ -110,6 +116,18 @@ export default function Index() {
 
 const NoPostsFound = () => {
   return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Orin</Text>
+        <Link
+        href="https://github.com/ViralJain47"
+        >
+          <Ionicons name="logo-github" size={30} color={COLORS.primary}/>
+        </Link>
+      </View>
+      <View>
+        <StoriesSection />
+      </View>
     <View
     style={{
       flex:1,
@@ -118,7 +136,8 @@ const NoPostsFound = () => {
       alignItems:"center"
     }}
     >
-    <Text style={{fontSize:20 , color:COLORS.primary}}>No posts yet</Text>
+    <Text style={{fontSize:23 , color:COLORS.primary, height:"18%"}}>No posts yet</Text>
+  </View>
   </View>
   )
 }

@@ -7,14 +7,14 @@ export const STORIES = [
     },
     {
       id: "2",
-      username: "Ishita",
-      avatar: "https://images.unsplash.com/photo-1552058544-f2b08422138a?crop=faces&fit=crop&w=200&h=200",
+      username: "Vansh",
+      avatar: "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?crop=faces&fit=crop&w=200&h=200",
       hasStory: true,
     },
     {
       id: "3",
       username: "Reyansh",
-      avatar: "https://images.unsplash.com/photo-1614282842437-d6f4d7bc7b1a?crop=faces&fit=crop&w=200&h=200",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?crop=faces&fit=crop&w=200&h=200",
       hasStory: true,
     },
     {
@@ -32,13 +32,13 @@ export const STORIES = [
     {
       id: "6",
       username: "Meera",
-      avatar: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?crop=faces&fit=crop&w=200&h=200",
+      avatar: "https://images.unsplash.com/photo-1648743856421-5bc9a742ddc5?crop=faces&fit=crop&w=200&h=200",
       hasStory: true,
     },
     {
       id: "7",
       username: "Aarav",
-      avatar: "https://images.unsplash.com/photo-1623690931802-02c3e0d1c442?crop=faces&fit=crop&w=200&h=200",
+      avatar: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?crop=faces&fit=crop&w=200&h=200",
       hasStory: true,
     },
     {

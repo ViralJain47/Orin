@@ -53,8 +53,8 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   emptyImageText: {
-    color: COLORS.grey,
-    fontSize: 16,
+    color: COLORS.white,
+    fontSize: 18,
   },
   content: {
     flex: 1,

@@ -45,7 +45,7 @@ const NoNotificationsFound = () => {
     }}
     >
       <Ionicons name='notifications-circle' size={40} style={{width:40, height:40}} color={COLORS.primary}/>
-      <Text style={{color:COLORS.primary, fontSize:22}}>No notifications yet</Text>
+      <Text style={{color:COLORS.white, fontSize:22}}>No notifications yet</Text>
     </View>
    )
 }

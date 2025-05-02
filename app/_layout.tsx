@@ -20,11 +20,11 @@ export default function RootLayout() {
   },[fontsLoaded])
 
   useEffect(() => {
-    if(Platform.OS === "android"){
-      NavigationBar.setBorderColorAsync("#000000");
+    if (Platform.OS === "android") {
+      NavigationBar.setBackgroundColorAsync("#000000");
       NavigationBar.setButtonStyleAsync("light");
     }
-  },[])
+  },[]);
 
   return (
       <ClerkAndConvexProvider>

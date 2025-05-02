@@ -109,7 +109,7 @@ try {
         </View>
 
         <TouchableOpacity style={styles.emptyImageContainer} onPress={pickImage}>
-          <Ionicons name='image-outline' size={48} color={COLORS.grey}/>
+          <Ionicons name='image-outline' size={48} color={COLORS.primary}/>
           <Text style={styles.emptyImageText}>Tap to select an image</Text>
         </TouchableOpacity>
 

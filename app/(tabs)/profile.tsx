@@ -181,7 +181,7 @@ function NoPostFound() {
   return (
     <View
       style={{
-        height: "100%",
+        height: "80%",
         backgroundColor: COLORS.background,
         justifyContent: "center",
         alignItems: "center"

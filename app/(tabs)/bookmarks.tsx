@@ -17,7 +17,7 @@ export default function Bookmarks() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-      <Text style={styles.headerTitle}>bookmarks</Text>
+      <Text style={styles.headerTitle}>Saved</Text>
       </View>
 
       <ScrollView
